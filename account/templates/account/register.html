@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style type="text/css">
+.form-register {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-register .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-register input[type="email"] {
+  margin-bottom: 10px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-register input[type="text"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form-register input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form-register h1{
+    text-align: center;
+}
+
+</style>
+
+<main class="form-register">
+    <form method="post"> {% csrf_token %}
+        <img class="mb-4" src="../account/templates/assets/brand/farmer.png" alt="" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">Register an account</h1>
+
+        <div class="form-floating">
+            <input type="email" name="email" class="form-control" id="inputEmail" placeholder="name@example.com"
+            required autofocus>
+            <label for="inputEmail">Email address</label>
+        </div>
+        <div class="form-floating">
+            <input type="text" name="username" class="form-control" id="inputUsername" placeholder="Username"
+            value="{{account_form.initial.username}}">
+            <label for="inputUsername">Username</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="password" name="password1" class="form-control" id="password1" placeholder="Password">
+            <label for="password1">Password</label>
+        </div>
+
+        <div class="form-floating">
+            <input type="password" name="password2" class="form-control" id="password2" placeholder="Password">
+            <label for="password2">Confirm password</label>
+        </div>
+
+        {% for field in registration_form %}
+        {% for error in field.errors %}
+        <p style="color: red;">{{error}}</p>
+        {% endfor %}
+        {% endfor %}
+        {% if registration_form.non_field_errors %}
+        <div style="color: red;">
+            <p>{{ registration_form.non_field_errors }}</p>
+        </div>
+        {% endif %}
+
+        {% if success_message %}
+            <p style="color:green; text-align: center;">{{ success_message }}</p>
+        {% endif %}
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Save</button>
+    </form>
+</main>
+
+
+<!--<form method="post">-->
+<!--    {% csrf_token %}-->
+<!--    {% for field in registration_form %}-->
+<!--    <p>-->
+<!--        {{ field.label_tag }}-->
+<!--        {{ field }}-->
+<!--        {% if field.help_text %}-->
+<!--        <small style="color: grey;">{{ field.help_text }}</small>-->
+<!--        {% endif %}-->
+
+<!--        {% for error in field.errors %}-->
+<!--    <p style="color: red;">{{ error }}</p>-->
+<!--    {% endfor %}-->
+<!--    </p>-->
+<!--    {% endfor %}-->
+<!--    <button type="submit">Register</button>-->
+<!--</form>-->
+
+
+{% endblock content %}
