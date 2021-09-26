@@ -4,6 +4,7 @@ from account.models import Account
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from operator import attrgetter
 from blog.views import get_blog_queryset
+
 BLOG_POSTS_PER_PAGE = 10
 
 

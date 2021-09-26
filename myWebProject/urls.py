@@ -39,6 +39,9 @@ urlpatterns = [
     path('account/', accountView, name='account'),
     path('must_authenticate/', mustAuthenticate, name='must_authenticate'),
 
+    # Rest framework urls
+    path('api/blog/', include('blog.api.urls', 'blog_api')),
+
     # path('accounts/', include('django.contrib.auth.urls')),
     # Password reset links (ref: https://github.com/django/django/blob/master/django/contrib/auth/views.py)
     path('password_change/done/',
